@@ -1,60 +1,42 @@
-name: Build and Deploy Markdown to Pages
+name: Deploy static content to Pages
 
 on:
   push:
     branches: ["main"]
 
+  # 允许你在 Actions 手动触发部署
+  workflow_dispatch:
+
+# 设置 GITHUB_TOKEN 的权限，以便部署到 Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# 允许并发部署
 concurrency:
   group: "pages"
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+        
       - name: Setup Pages
         uses: actions/configure-pages@v4
-
-      - name: Build static site
-        run: |
-          mkdir -p _site
-          for file in *.md; do
-            if [ -f "$file" ]; then
-              filename=$(basename -- "$file" .md)
-              if [ "$filename" != "README" ]; then
-                echo "<!DOCTYPE html><html><head><meta charset='utf-8'><title>$filename</title><style>body{max-width:800px;margin:40px auto;padding:0 20px;font-family:sans-serif;line-height:1.6;}</style></head><body>" > "_site/$filename.html"
-                cat "$file" >> "_site/$filename.html"
-                echo "</body></html>" >> "_site/$filename.html"
-              fi
-            fi
-          done
-          if [ -f "README.md" ]; then
-            filename="index"
-            echo "<!DOCTYPE html><html><head><meta charset='utf-8'><title>Newport Games Guides</title><style>body{max-width:800px;margin:40px auto;padding:0 20px;font-family:sans-serif;line-height:1.6;}</style></head><body>" > "_site/$filename.html"
-            cat "README.md" >> "_site/$filename.html"
-            echo "</body></html>" >> "_site/$filename.html"
-          fi
-
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '_site'
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment-url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
+          # 直接把当前根目录（包含你的 index.html）打包上传
+          path: '.'
+          
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
