@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # Troubleshooting NewportGames Login Issues: Quick Step-by-Step Fixes
 
 Maraming Pinoy players ang nakakaranas ng biglang pag-error, loading screen loop, o hindi pagtanggap ng credentials tuwing subukang mag-access sa kanilang gaming accounts. Ang pagkakaroon ng abala sa [NewportGames Login](https://www.newportgames.com/home/) ay kadalasang sanhi ng maliliit na browser issues, outdated cache, o hindi tamang verification input. Sa artikulong ito, iisa-isahin natin ang mabilis at praktikal na solusyon upang maayos ang anumang login errors at makabalik ka agad sa iyong paboritong games nang ligtas.
