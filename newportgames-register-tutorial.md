@@ -225,4 +225,4 @@ If you want to learn more about registration, login access, and account features
 
 1. [Newport Games Register: Complete Account Setup Guide for New Players](https://nwrgames111.blogspot.com/2026/10/newport-games-register-complete-account.html)
 2. [Newport Games Login: Secure Access & Account Guide 2026](https://hackmd.io/@marry0/SyQw4rm2Me)
-3. [Newport Games Online: Practical Guide to Account Access & Features](https://velog.io/@pqs_0318/Newport-Games-Online-Practical-Guide-to-Account-Access-Features](https://velog.io/@pqs_0318/Newport-Games-Online-Practical-Guide-to-Account-Access-Features)
+3. [Newport Games Online: Practical Guide to Account Access & Features](https://velog.io/@pqs_0318/Newport-Games-Online-Practical-Guide-to-Account-Access-Features)
