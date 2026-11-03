@@ -1,0 +1,27 @@
+name: IndexNow Submission
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Submit URLs to IndexNow
+        run: |
+          curl -X POST "https://api.indexnow.org/indexnow" \
+               -H "Content-Type: application/json; charset=utf-8" \
+               -d '{
+                 "host": "gaming-hub-nexus.github.io",
+                 "key": "123456",
+                 "keyLocation": "https://gaming-hub-nexus.github.io/newportgames-guides/123456.txt",
+                 "urlList": [
+                   "https://gaming-hub-nexus.github.io/newportgames-guides/newportgames-register-tutorial.md"
+                 ]
+               }'
