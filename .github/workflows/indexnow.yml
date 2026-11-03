@@ -15,8 +15,8 @@ jobs:
 
       - name: Generate URL list and Submit to IndexNow
         run: |
-          # 1. 自动寻找当前仓库下的所有 .md 文件，并转换成对应的 GitHub Pages 线上网址
-          URLS=$(find . -name "*.md" | sed 's|^\./|https://gaming-hub-nexus.github.io/newportgames-guides/|' | jq -R -s -c 'split("\n")[:-1]')
+          # 1. 自动寻找当前仓库下的所有 .md 和 .html 文件并转换成 newportgames-guides 的线上网址
+          URLS=$(find . \( -name "*.md" -o -name "*.html" \) | sed 's|^\./|https://gaming-hub-nexus.github.io/newportgames-guides/|' | jq -R -s -c 'split("\n")[:-1]')
           
           echo "Submitting the following URLs:"
           echo $URLS
