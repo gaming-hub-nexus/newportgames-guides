@@ -13,15 +13,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Submit URLs to IndexNow
+      - name: Generate URL list and Submit to IndexNow
         run: |
+          # 1. 自动寻找当前仓库下的所有 .md 文件，并转换成对应的 GitHub Pages 线上网址
+          URLS=$(find . -name "*.md" | sed 's|^\./|https://gaming-hub-nexus.github.io/newportgames-guides/|' | jq -R -s -c 'split("\n")[:-1]')
+          
+          echo "Submitting the following URLs:"
+          echo $URLS
+
+          # 2. 构造 JSON 并使用 curl 自动提交给 IndexNow
           curl -X POST "https://api.indexnow.org/indexnow" \
                -H "Content-Type: application/json; charset=utf-8" \
-               -d '{
-                 "host": "gaming-hub-nexus.github.io",
-                 "key": "123456",
-                 "keyLocation": "https://gaming-hub-nexus.github.io/newportgames-guides/123456.txt",
-                 "urlList": [
-                   "https://gaming-hub-nexus.github.io/newportgames-guides/newportgames-register-tutorial.md"
-                 ]
-               }'
+               -d "{
+                 \"host\": \"gaming-hub-nexus.github.io\",
+                 \"key\": \"123456\",
+                 \"keyLocation\": \"https://gaming-hub-nexus.github.io/newportgames-guides/123456.txt\",
+                 \"urlList\": $URLS
+               }"
